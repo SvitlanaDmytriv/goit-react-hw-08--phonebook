@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { fetchContactsAll } from '../redux/contacts/contactsOperations';
-import ContactsSection from '../component/ContactsSection/ContactsSection';
+import ContactsSection from '../component/Contacts/ContactsSection/ContactsSection';
 import { useDispatch } from 'react-redux';
-import ContactForm from '../component/ContactForm/ContactForm';
-import Modal from '../component/Modal/Modal';
+import ContactForm from '../component/Contacts/ContactForm/ContactForm';
+import Modal from '../component/Contacts/Modal/Modal';
 
-export default function ContactsPage() {
+export function ContactsPage() {
   const [showModal, setShowModal] = useState(false);
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ export default function ContactsPage() {
   };
   useEffect(() => {
     dispatch(fetchContactsAll());
-  }, []);
+  }, [dispatch]);
   return (
     <>
       {showModal && (

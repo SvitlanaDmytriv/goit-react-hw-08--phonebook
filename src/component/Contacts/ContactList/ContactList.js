@@ -2,25 +2,27 @@
 import { PersonXFill } from 'react-bootstrap-icons';
 import PropTypes from 'prop-types';
 import s from './ContactList.module.css';
-import Button from '../Button/Button';
-import { getFilteredContacts } from '../../redux/contacts/contactsSelectors';
+import Button from '../../Button/Button';
+import { getFilteredContacts } from '../../../redux/contacts/contactsSelectors';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteContact } from '../../redux/contacts/contactsOperations';
+import { deleteContact } from '../../../redux/contacts/contactsOperations';
 
 function ContactList() {
   const dispatch = useDispatch();
 
-  const deleteItem = id => dispatch(deleteContact(id));
+  const deleteItem = id => {
+    return dispatch(deleteContact(id));
+  };
 
   const visibleContacts = useSelector(getFilteredContacts);
 
   return (
     <ul className={s.list}>
-      {visibleContacts.map(({ name, phone, id }) => (
+      {visibleContacts.map(({ name, number, id }) => (
         <li key={id} className={s.listItem}>
           <div className={s.contactItem}>
             <span className={s.contact}>{name} :</span>
-            <span className={s.contact}>{phone}</span>
+            <span className={s.contact}>{number}</span>
           </div>
           <Button
             className={s.button}

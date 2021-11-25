@@ -1,10 +1,10 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getContacts } from '../../redux/contacts/contactsSelectors';
-import { addContact } from '../../redux/contacts/contactsOperations';
+import { getContacts } from '../../../redux/contacts/contactsSelectors';
+import { addContact } from '../../../redux/contacts/contactsOperations';
 import { XLg } from 'react-bootstrap-icons';
-import Button from '../Button/Button';
+import Button from '../../Button/Button';
 import s from './ContactForm.module.css';
 
 function ContactForm({ toggleModall }) {
@@ -38,7 +38,8 @@ function ContactForm({ toggleModall }) {
     if (contactСomparison) {
       alert(`${name} is already in contacts`);
     } else {
-      dispatch(addContact({ name, number }));
+      const contact = { name, number };
+      dispatch(addContact(contact));
     }
     setName('');
     setNumber('');

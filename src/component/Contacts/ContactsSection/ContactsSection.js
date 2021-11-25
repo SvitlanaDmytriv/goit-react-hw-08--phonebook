@@ -2,14 +2,14 @@ import PropTypes from 'prop-types';
 import s from './ContactsSection.module.css';
 import ContactFilter from '../ContactFilter/ContactFilter';
 import ContactList from '../ContactList/ContactList';
-import Button from '../Button/Button';
+import Button from '../../Button/Button';
 import { PlusCircleFill } from 'react-bootstrap-icons';
 import { useSelector } from 'react-redux';
 import {
   getFilteredContacts,
   getFilter,
   getContacts,
-} from '../../redux/contacts/contactsSelectors';
+} from '../../../redux/contacts/contactsSelectors';
 
 export default function ContactsSection({ toggleModall }) {
   const contactsAll = useSelector(getContacts);
