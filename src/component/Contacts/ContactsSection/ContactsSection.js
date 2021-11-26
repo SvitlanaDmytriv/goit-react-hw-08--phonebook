@@ -17,7 +17,7 @@ export default function ContactsSection({ toggleModall }) {
   const visibleContacts = useSelector(getFilteredContacts);
 
   return (
-    <div className={s.container}>
+    <div className={s.containerRelative}>
       <h2 className={s.title}>Contacts</h2>
       <Button className={s.button} type="button" onClick={toggleModall}>
         <PlusCircleFill width="40" height="40" className={s.icon} />

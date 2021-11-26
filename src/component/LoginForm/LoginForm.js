@@ -1,7 +1,7 @@
-import s from '../Contacts/ContactForm/ContactForm.module.css';
-import stl from './LoginForm.module.css';
+import s from './LoginForm.module.css';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../redux/user/userOperation';
 
 import Button from '../Button/Button';
@@ -9,6 +9,7 @@ export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -45,36 +46,45 @@ export function LoginForm() {
     setPassword('');
   };
 
+  const handleClick = () => {
+    return navigate('/signup');
+  };
+
   return (
-    <form className={s.form} onSubmit={handleSubmit}>
-      <label className={s.label}>email</label>
-      <input
-        className={s.input}
-        type="email"
-        name="email"
-        value={email}
-        autoComplete="on"
-        required
-        onChange={handleChange}
-      />
-
-      <label className={s.label}>password</label>
-      <input
-        className={s.input}
-        type="password"
-        name="password"
-        value={password}
-        required
-        onChange={handleChange}
-      />
-
+    <>
       <Button
-        className={`${s.button} ${stl.btn}`}
-        type="submit"
-        disabled={disabled}
+        className={`${s.button} ${s.btnAbsolute}`}
+        type="button"
+        onClick={handleClick}
       >
-        login
+        SignUp
       </Button>
-    </form>
+      <form className={s.form} onSubmit={handleSubmit}>
+        <label className={s.label}>Email</label>
+        <input
+          className={s.input}
+          type="email"
+          name="email"
+          value={email}
+          autoComplete="on"
+          required
+          onChange={handleChange}
+        />
+
+        <label className={s.label}>Password</label>
+        <input
+          className={s.input}
+          type="password"
+          name="password"
+          value={password}
+          required
+          onChange={handleChange}
+        />
+
+        <Button className={s.button} type="submit" disabled={disabled}>
+          Login
+        </Button>
+      </form>
+    </>
   );
 }
