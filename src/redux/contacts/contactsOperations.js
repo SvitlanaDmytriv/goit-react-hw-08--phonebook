@@ -6,9 +6,13 @@ export const fetchContactsAll = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, { rejectWithValue }) => {
     try {
-      const { data } = await fetchContacts();
-
-      return data;
+      const response = await fetchContacts();
+      const { data } = response;
+      if (response.status === 404) {
+        return rejectWithValue();
+      } else {
+        return data;
+      }
     } catch (error) {
       rejectWithValue(error);
     }

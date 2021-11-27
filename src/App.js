@@ -4,7 +4,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { PrivateRoute, PublicRoute } from './component/Routes/';
 import { getIsAuth } from './redux/user/userSelectors';
 import { currentUser } from './redux/user/userOperation';
-import { fetchContactsAll } from './redux/contacts/contactsOperations';
 import { ContactsPage, LoginPage, AuthPage, NotFoundPage } from './views';
 
 function App() {
@@ -13,7 +12,6 @@ function App() {
 
   useEffect(() => {
     dispatch(currentUser());
-    dispatch(fetchContactsAll());
   }, [dispatch]);
 
   return (
