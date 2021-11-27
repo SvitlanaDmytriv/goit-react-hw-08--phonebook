@@ -25,26 +25,36 @@ const usersSlice = createSlice({
       state.isLoading = true;
     },
     [signupUser.fulfilled]: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoading = false;
-      state.isAuth = true;
-      state.error = null;
+      console.log(action.payload);
+      if (action.payload) {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoading = false;
+        state.isAuth = true;
+        state.error = null;
+      } else {
+        state.error = { message: 'user with such data is already registered' };
+      }
     },
     [signupUser.rejected]: (state, action) => {
       state.isLoading = false;
       state.error = action.payload;
     },
     //////////////
-    [loginUser.pending]: (state, _) => {
+    [loginUser.pending]: state => {
       state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoading = false;
-      state.isAuth = true;
-      state.error = null;
+      console.log(action);
+      if (action.payload) {
+        state.user = action.payload.user;
+        state.token = action.payload.token;
+        state.isLoading = false;
+        state.isAuth = true;
+        state.error = null;
+      } else {
+        state.error = { message: 'invalid date' };
+      }
     },
     [loginUser.rejected]: (state, action) => {
       state.isLoading = false;
@@ -62,7 +72,7 @@ const usersSlice = createSlice({
     },
     [currentUser.rejected]: (state, action) => {
       state.isLoading = false;
-      state.error = action.payload;
+      state.error = action.error;
       state.isAuth = false;
     },
     //////////

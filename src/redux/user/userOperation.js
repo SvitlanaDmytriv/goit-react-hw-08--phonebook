@@ -34,9 +34,13 @@ export const loginUser = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const { data } = await axios.post(loginEdpoint, user);
-
-      token.set(data.token);
-      return data;
+      if (data.user) {
+        token.set(data.token);
+        console.log(data);
+        return data;
+      } else {
+        return new Error('mmm');
+      }
     } catch (error) {
       rejectWithValue(error.message);
     }
