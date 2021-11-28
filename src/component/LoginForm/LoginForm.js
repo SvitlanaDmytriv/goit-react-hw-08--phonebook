@@ -3,8 +3,8 @@ import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../../redux/user/userOperation';
-
 import Button from '../Button/Button';
+
 export function LoginForm() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,6 +38,7 @@ export function LoginForm() {
     e.preventDefault();
     const user = { email, password };
     dispatch(loginUser(user));
+
     resetForm();
   };
 

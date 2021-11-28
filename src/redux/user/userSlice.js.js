@@ -33,6 +33,7 @@ const usersSlice = createSlice({
         state.isAuth = true;
         state.error = null;
       } else {
+        state.isLoading = false;
         state.error = { message: 'user with such data is already registered' };
       }
     },
@@ -45,7 +46,6 @@ const usersSlice = createSlice({
       state.isLoading = true;
     },
     [loginUser.fulfilled]: (state, action) => {
-      console.log(action);
       if (action.payload) {
         state.user = action.payload.user;
         state.token = action.payload.token;
@@ -53,6 +53,7 @@ const usersSlice = createSlice({
         state.isAuth = true;
         state.error = null;
       } else {
+        state.isLoading = false;
         state.error = { message: 'invalid date' };
       }
     },

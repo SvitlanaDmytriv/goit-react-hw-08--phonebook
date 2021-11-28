@@ -39,7 +39,7 @@ const contactsSlice = createSlice({
 
     [addContact.pending]: (state, _) => ({ ...state, loading: true }),
     [addContact.fulfilled]: (state, action) => {
-      state.items = action.payload;
+      state.items = [...state.items, action.payload];
       state.loading = false;
       state.error = null;
     },

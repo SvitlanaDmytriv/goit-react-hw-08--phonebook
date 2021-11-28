@@ -2,6 +2,7 @@ import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
 const signupEdpoint = '/users/signup';
 const loginEdpoint = '/users/login';
 const logoutEdpoint = '/users/logout';
@@ -20,7 +21,12 @@ export const signupUser = createAsyncThunk(
   'user/signup',
   async (user, { rejectWithValue }) => {
     try {
-      const { data } = await axios.post(`${signupEdpoint}`, user);
+      const res = await axios.post(`${signupEdpoint}`, user);
+      console.log(res);
+      const { data } = res;
+      if (res.status === 400) {
+        throw new Error('error');
+      }
       token.set(data.token);
       return data;
     } catch (error) {
@@ -36,10 +42,10 @@ export const loginUser = createAsyncThunk(
       const { data } = await axios.post(loginEdpoint, user);
       if (data.user) {
         token.set(data.token);
-        console.log(data);
+
         return data;
       } else {
-        return new Error('mmm');
+        return;
       }
     } catch (error) {
       rejectWithValue(error.message);
@@ -70,11 +76,14 @@ export const currentUser = createAsyncThunk(
 
 export const logoutUser = createAsyncThunk(
   'user/logout',
-  async (_, { rejectWithValue }) => {
+  async (_, { rejectWithValue, getState }) => {
+    const state = getState();
+
     try {
       const { data } = await axios.post(logoutEdpoint);
 
       token.unset();
+      state.contacts.items = [];
       return data;
     } catch (error) {
       rejectWithValue(error.message);
