@@ -22,7 +22,7 @@ export default function ContactsSection({ toggleModall }) {
       <Button className={s.button} type="button" onClick={toggleModall}>
         <PlusCircleFill width="40" height="40" className={s.icon} />
       </Button>
-      {contactsAll.length > 1 && <ContactFilter />}
+      <ContactFilter />
       {contactsAll.length > 0 ? (
         <ContactList />
       ) : (

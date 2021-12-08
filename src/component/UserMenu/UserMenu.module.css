@@ -9,21 +9,26 @@
   display: flex;
   align-items: baseline;
   margin-left: auto;
+  color: #102e4f;
 }
 
 .button {
-  padding: 5px;
-  color: #6bc8ff;
-  font-size: 15px;
+  background: none;
   border: none;
-  border-radius: 5px;
-
-  cursor: pointer;
-  background-color: #0f4581;
-  transition: box-shadow 250ms linear;
 }
 
-.button:hover,
+/* .button:hover,
 .button:focus {
   background-color: #081a29;
+} */
+
+.icon {
+  width: 30px;
+  height: auto;
+  color: #102e4f;
+}
+
+.icon:hover,
+.icon:focus {
+  color: #fff;
 }

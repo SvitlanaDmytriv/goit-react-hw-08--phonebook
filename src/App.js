@@ -1,10 +1,16 @@
 import { useEffect } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Route, Routes, Navigate, Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { PrivateRoute, PublicRoute } from './component/Routes/';
 import { getIsAuth } from './redux/user/userSelectors';
 import { currentUser } from './redux/user/userOperation';
-import { ContactsPage, LoginPage, AuthPage, NotFoundPage } from './views';
+import {
+  ContactsPage,
+  LoginPage,
+  AuthPage,
+  // Filter,
+  NotFoundPage,
+} from './views';
 
 function App() {
   const isAuth = useSelector(getIsAuth);
@@ -17,6 +23,7 @@ function App() {
   return (
     <>
       <main>
+        {/* <Link to="/filter">Filter</Link> */}
         <Routes>
           <Route path="/" element={<Navigate replace to="/login" />} />
           <Route
@@ -30,7 +37,8 @@ function App() {
           <Route
             path="/contacts"
             element={<PrivateRoute isAuth={isAuth} component={ContactsPage} />}
-          />
+          />{' '}
+          {/* <Route path="/filter" element={<Filter />} /> */}
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
